@@ -25,6 +25,9 @@ The programs (in the order they were written) are:
 * `tab-fast.hs`: Accumulates votes into a candidate vote
   totals list on the fly. Not terribly fast.
 
+* `tab-faster.hs`: Accumulates votes into a candidate vote
+  totals IOArray on the fly. Actually slower.
+
 * `tab-py.hs`: Python version for comparison.
 
 * `tab.c`: C version for comparison.
