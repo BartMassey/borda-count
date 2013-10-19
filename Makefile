@@ -14,19 +14,19 @@ TARGETS = tab-iterate tab-map tab-transpose tab-fast tab-faster tab-c
 all: $(TARGETS)
 
 tab-iterate: tab-iterate.hs
-	$(HC) $(HCFLAGS) --make tab-iterate.hs
+	$(HC) $(HFLAGS) --make tab-iterate.hs
 
 tab-map: tab-map.hs
-	$(HC) $(HCFLAGS) --make tab-map.hs
+	$(HC) $(HFLAGS) --make tab-map.hs
 
 tab-transpose: tab-transpose.hs
-	$(HC) $(HCFLAGS) --make tab-transpose.hs
+	$(HC) $(HFLAGS) --make tab-transpose.hs
 
 tab-fast: tab-fast.hs
-	$(HC) $(HCFLAGS) --make tab-fast.hs
+	$(HC) $(HFLAGS) --make tab-fast.hs
 
 tab-faster: tab-faster.hs
-	$(HC) $(HCFLAGS) --make tab-faster.hs
+	$(HC) $(HFLAGS) --make tab-faster.hs
 
 tab-c: tab.c
 	$(CC) $(CFLAGS) -o tab-c tab.c
