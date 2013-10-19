@@ -15,7 +15,7 @@ import Text.Printf
 -- Strategy: Split the accumulator
 -- at the index position; add the vote;
 -- glue the accumulator back together.
-acc :: IOArray Int Int -> (Char, Int) -> IO (IOArray Int Int)
+acc :: IOUArray Int Int -> (Char, Int) -> IO (IOUArray Int Int)
 acc a ('-', _) = return a
 acc a (c, v) = do
   let i = ord c - ord 'a'
