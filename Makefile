@@ -10,7 +10,7 @@ CFLAGS = -Wall -O2 -std=c99
 HC = ghc
 HFLAGS = -Wall -O2
 TARGETS = tab-iterate tab-map tab-transpose tab-fast tab-faster \
-          tab-text tab-c
+          tab-text tab-bs tab-c
 
 all: $(TARGETS)
 
@@ -31,6 +31,9 @@ tab-faster: tab-faster.hs
 
 tab-text: tab-text.hs
 	$(HC) $(HFLAGS) --make tab-text.hs
+
+tab-bs: tab-bs.hs
+	$(HC) $(HFLAGS) --make tab-bs.hs
 
 tab-c: tab.c
 	$(CC) $(CFLAGS) -o tab-c tab.c
