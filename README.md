@@ -29,7 +29,8 @@ The programs (in the order they were written) are:
   totals IOUArray on the fly. About twice as fast.
 
 * `tab-text.hs`: Use `Data.Text` instead of `String`
-  for some internal operations.
+  for some internal operations. Also, rewrites the
+  structure a bit. About twice as fast as `tab-faster`.
 
 * `tab-py.hs`: Python version for comparison.
 
