@@ -28,6 +28,9 @@ The programs (in the order they were written) are:
 * `tab-faster.hs`: Accumulates votes into a candidate vote
   totals IOUArray on the fly. About twice as fast.
 
+* `tab-text.hs`: Use `Data.Text` instead of `String`
+  for some internal operations.
+
 * `tab-py.hs`: Python version for comparison.
 
 * `tab.c`: C version for comparison.
