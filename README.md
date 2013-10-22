@@ -16,21 +16,31 @@ The programs (in the order they were written) are:
   score of each candidate in turn.
 
 * `tab-map.hs`: Uses an accumulating map constructor to
-  total up all the votes on the fly.
+  total up all the votes on the fly. Fails on large inputs.
 
 * `tab-transpose.hs`: Transposes the votes file to get
   each score rank together, then plays games with
-  `replicate` to get everything counted.
+  `replicate` to get everything counted. Fails
+  on large inputs.
 
 * `tab-fast.hs`: Accumulates votes into a candidate vote
   totals list on the fly. Not terribly fast.
 
 * `tab-faster.hs`: Accumulates votes into a candidate vote
-  totals IOArray on the fly. Actually slower.
+  totals IOUArray on the fly. About twice as fast.
+
+* `tab-text.hs`: Use `Data.Text.Lazy` instead of `String`
+  for some internal operations. Also, rewrites the structure
+  a bit. About twice as fast as `tab-faster`.
+
+* `tab-bs.hs`: Use `Data.ByteString.Lazy` instead of
+  `String` for some internal operations. About three times
+  as fast as `tab-text`.
 
 * `tab-py.hs`: Python version for comparison.
 
-* `tab.c`: C version for comparison.
+* `tab.c`: C version for comparison. About 5 times faster
+  than `tab-bs`.
 
 To build these programs, just type `make`.
 
