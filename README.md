@@ -37,7 +37,7 @@ The programs (in the order they were written) are:
   `String` for some internal operations. About three times
   as fast as `tab-text`.
 
-* `tab-py.hs`: Python version for comparison.
+* `tab.py`: Python version for comparison.
 
 * `tab.c`: C version for comparison. About 5 times faster
   than `tab-bs`.
