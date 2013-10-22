@@ -1,3 +1,5 @@
+% Copyright © 2013 Cameron White 
+
 getVotesByColumn(In, [], [], [], [], [], []) :-
     at_end_of_stream(In).
 getVotesByColumn(In, [X1|X1s], [X2|X2s], [X3|X3s], 
