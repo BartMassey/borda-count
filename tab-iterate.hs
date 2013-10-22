@@ -11,7 +11,7 @@ import Text.Printf
 -- candidate; add them up; print the total.
 showVotes :: [(Int, Char)] -> Char -> IO ()
 showVotes votes selector = do
-  let count = sum $ map fst $ filter ((== selector) . snd) votes
+  let count = sum $! map fst $! filter ((== selector) . snd) votes
   printf "%c: %d\n" selector count
 
 main :: IO ()
