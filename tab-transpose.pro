@@ -1,5 +1,18 @@
 % Copyright © 2013 Cameron White 
 
+getAndCountVotes(File, A, B, C, D, E, F) :-
+    open(File, read, In),
+    getVotesByColumn(In, As, Bs, Cs, Ds, Es, Fs),
+    close(In),
+    multiplyList(As, 6, A1s),
+    multiplyList(Bs, 5, B1s),
+    multiplyList(Cs, 4, C1s),
+    multiplyList(Ds, 3, D1s),
+    multiplyList(Es, 2, E1s),
+    multiplyList(Fs, 1, F1s),
+    concatenate6(A1s, B1s, C1s, D1s, E1s, F1s, Xs),
+    countVotes(Xs, A, B, C, D, E, F).
+
 getVotesByColumn(In, [], [], [], [], [], []) :-
     at_end_of_stream(In).
 getVotesByColumn(In, [X1|X1s], [X2|X2s], [X3|X3s], 
@@ -36,21 +49,14 @@ countVote(e, A, B, C, D, E1, F, A, B, C, D, E, F) :- E is E1 + 1.
 countVote(f, A, B, C, D, E, F1, A, B, C, D, E, F) :- F is F1 + 1.
 countVote(-, A, B, C, D, E, F, A, B, C, D, E, F).
 
-main :-
-    open('votes.txt', read, In),
-    getVotesByColumn(In, As, Bs, Cs, Ds, Es, Fs),
-    multiplyList(As, 6, A1s),
-    multiplyList(Bs, 5, B1s),
-    multiplyList(Cs, 4, C1s),
-    multiplyList(Ds, 3, D1s),
-    multiplyList(Es, 2, E1s),
-    multiplyList(Fs, 1, F1s),
-    concatenate6(A1s, B1s, C1s, D1s, E1s, F1s, Xs),
-    countVotes(Xs, A, B, C, D, E, F),
+printVotes(A, B, C, D, E, F) :-
     write('a:'), writeln(A),
     write('b:'), writeln(B),
     write('c:'), writeln(C),
     write('d:'), writeln(D),
     write('f:'), writeln(E),
-    write('g:'), writeln(F),
-    close(In).
+    write('g:'), writeln(F).
+
+main :-
+    getAndCountVotes('votes.txt', A, B, C, D, E, F),
+    printVotes(A, B, C, D, E, F).
