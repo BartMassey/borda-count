@@ -42,6 +42,8 @@ The programs (in the order they were written) are:
 * `tab.c`: C version for comparison. About 5 times faster
   than `tab-bs`.
 
+* `tab-transpose.pro`: Prolog version for comparison.
+
 To build these programs, just type `make`.
 
 The performance differences of these programs are pretty
