@@ -7,10 +7,8 @@
 % by its respective point value, concatenates each 
 % column list together, then counts up the occurrences
 % of each letter as A, B, C, D, E, and F.
-getAndCountVotes(File, [(A,a), (B,b), (C,c), (D,d), (E,e), (F,f)]) :-
-    open(File, read, In),
-    getVotesByColumn(In, As, Bs, Cs, Ds, Es, Fs),
-    close(In),
+getAndCountVotes([(A,a), (B,b), (C,c), (D,d), (E,e), (F,f)]) :-
+    getVotesByColumn(user_input, As, Bs, Cs, Ds, Es, Fs),
     multiplyList(As, 6, A1s),
     multiplyList(Bs, 5, B1s),
     multiplyList(Cs, 4, C1s),
@@ -78,7 +76,8 @@ printVotes([(C,L)|Votes]) :-
     printVotes(Votes).
 
 main :-
-    getAndCountVotes('votes.txt', Votes),
+    prompt(_,''),
+    getAndCountVotes(Votes),
     sort(Votes, SortedVotes), 
     reverse(SortedVotes, ReversedVotes),
     printVotes(ReversedVotes).
