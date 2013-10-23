@@ -1,4 +1,7 @@
 % Copyright © 2013 Cameron White 
+% [This program is licensed under the "MIT License"]
+% Please see the file COPYING in the source
+% distribution of this software for license terms.
 
 % Gets all the votes by column, multiply each column
 % by its respective point value, concatenates each 
