@@ -11,7 +11,7 @@ HC = ghc
 HFLAGS = -Wall -O2
 PC = swipl
 TARGETS = tab-iterate tab-map tab-transpose tab-fast tab-faster \
-          tab-text tab-c tab-transpose-pro
+          tab-text tab-c tab-bs tab-transpose-pro
 
 all: $(TARGETS)
 
