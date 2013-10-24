@@ -45,14 +45,15 @@ The programs (in the order they were written) are:
 * `tab.pro`: Prolog version for comparison.  SWI Prolog
   (`swipl`) will be needed to build, so not included in the
   default build targets: build with `make everything`. Run
-  with `swipl -x tab-prolog`.
+  with `swipl -x tab-prolog`. Very slow. Fails on large inputs.
 
 * `tab-transpose.pro`: Prolog version for comparison.  This
-  version uses explicit arguments rather than lists, so may
-  be slightly faster but certainly is more fragile.  SWI
+  version uses explicit arguments rather than lists, so
+  slightly faster that `tab.pro` but much more fragile.  SWI
   Prolog (`swipl`) will be needed to build, so not included
   in the default build targets: build with `make
-  everything`. Run with `swipl -x tab-transpose-prolog`.
+  everything`. Run with `swipl -x
+  tab-transpose-prolog`. Very slow. Fails on large inputs.
 
 To build everything except the Prolog programs, just type
 `make`.
