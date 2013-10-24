@@ -10,6 +10,7 @@ CFLAGS = -Wall -O2 -std=c99
 HC = ghc
 HFLAGS = -Wall -O2
 PC = swipl
+PFLAGS = -O2
 TARGETS = tab-iterate tab-map tab-transpose tab-fast tab-faster \
           tab-text tab-c tab-bs
 PROLOG = tab-prolog.o tab-transpose-prolog.o
@@ -43,10 +44,10 @@ tab-c: tab.c
 	$(CC) $(CFLAGS) -o tab-c tab.c
 
 tab-prolog.o: tab.pro
-	$(PC) -q -t main -o tab-prolog.o -c tab.pro
+	$(PC) $(PFLAGS) -q -t main -o tab-prolog.o -c tab.pro
 
 tab-transpose-prolog.o: tab-transpose.pro
-	$(PC) -q -t main -o tab-transpose-prolog.o -c tab-transpose.pro
+	$(PC) $(PFLAGS) -q -t main -o tab-transpose-prolog.o -c tab-transpose.pro
 
 clean:
 	-rm -f $(TARGETS) $(PROLOG) *.o *.hi votes[1-9]*.txt
