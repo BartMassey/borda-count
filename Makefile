@@ -11,9 +11,12 @@ HC = ghc
 HFLAGS = -Wall -O2
 PC = swipl
 TARGETS = tab-iterate tab-map tab-transpose tab-fast tab-faster \
-          tab-text tab-c tab-bs tab-transpose-pro
+          tab-text tab-c tab-bs
+PROLOG = tab-prolog.o tab-transpose-prolog.o
 
 all: $(TARGETS)
+
+everything: $(TARGETS) $(PROLOG)
 
 tab-iterate: tab-iterate.hs
 	$(HC) $(HFLAGS) --make tab-iterate.hs
@@ -23,9 +26,6 @@ tab-map: tab-map.hs
 
 tab-transpose: tab-transpose.hs
 	$(HC) $(HFLAGS) --make tab-transpose.hs
-
-tab-transpose-pro: tab-transpose.pro
-	$(PC) -q -t main -o tab-transpose-pro.o -c tab-transpose.pro
 
 tab-fast: tab-fast.hs
 	$(HC) $(HFLAGS) --make tab-fast.hs
@@ -42,5 +42,11 @@ tab-bs: tab-bs.hs
 tab-c: tab.c
 	$(CC) $(CFLAGS) -o tab-c tab.c
 
+tab-prolog.o: tab.pro
+	$(PC) -q -t main -o tab-prolog.o -c tab.pro
+
+tab-transpose-prolog.o: tab-transpose.pro
+	$(PC) -q -t main -o tab-transpose-prolog.o -c tab-transpose.pro
+
 clean:
-	-rm -f $(TARGETS) *.o *.hi
+	-rm -f $(TARGETS) $(PROLOG) *.o *.hi

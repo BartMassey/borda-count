@@ -12,8 +12,8 @@ through *f* from best to worst.
 
 The programs (in the order they were written) are:
 
-* `tab-iterate.hs`: Score all the votes, then total up the
-  score of each candidate in turn.
+* `tab-iterate.hs`: Scores all the votes, then totals up the
+  score of each candidate in turn. May fail on large inputs.
 
 * `tab-map.hs`: Uses an accumulating map constructor to
   total up all the votes on the fly. Fails on large inputs.
@@ -42,9 +42,20 @@ The programs (in the order they were written) are:
 * `tab.c`: C version for comparison. About 5 times faster
   than `tab-bs`.
 
-* `tab-transpose.pro`: Prolog version for comparison.
+* `tab.pro`: Prolog version for comparison.  SWI Prolog
+  (`swipl`) will be needed to build, so not included in the
+  default build targets: build with `make everything`. Run
+  with `swipl -x tab-prolog`.
 
-To build these programs, just type `make`.
+* `tab-transpose.pro`: Prolog version for comparison.  This
+  version uses explicit arguments rather than lists, so may
+  be slightly faster but certainly is more fragile.  SWI
+  Prolog (`swipl`) will be needed to build, so not included
+  in the default build targets: build with `make
+  everything`. Run with `swipl -x tab-transpose-prolog`.
+
+To build everything except the Prolog programs, just type
+`make`.
 
 The performance differences of these programs are pretty
 noticeable. However, they all fail for large vote file
