@@ -49,4 +49,4 @@ tab-transpose-prolog.o: tab-transpose.pro
 	$(PC) -q -t main -o tab-transpose-prolog.o -c tab-transpose.pro
 
 clean:
-	-rm -f $(TARGETS) $(PROLOG) *.o *.hi
+	-rm -f $(TARGETS) $(PROLOG) *.o *.hi votes[1-9]*.txt
