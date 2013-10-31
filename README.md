@@ -47,6 +47,10 @@ The programs (in the order they were written) are:
   for storage (thus getting rid of `Data.Array.IO` for
   cleanliness). A little slower than `tab-bs`.
 
+* `tab-mvector.hs`: As `tab-vector`, but uses
+  `Data.Vector.Mutable.Unboxed` for storage. Just barely
+  faster than `tab-bs`.
+
 * `tab.py`: Python version for comparison.
 
 * `tab.c`: C version for comparison. About 5 times faster

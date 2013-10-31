@@ -12,7 +12,7 @@ HFLAGS = -Wall -O2
 PC = swipl
 PFLAGS = -O2
 TARGETS = tab-iterate tab-map tab-transpose tab-fast tab-faster \
-          tab-text tab-c tab-bs tab-lines tab-vector
+          tab-text tab-c tab-bs tab-lines tab-vector tab-mvector
 PROLOG = tab-prolog.o tab-transpose-prolog.o
 
 all: $(TARGETS)
@@ -45,6 +45,9 @@ tab-lines: tab-lines.hs
 
 tab-vector: tab-vector.hs
 	$(HC) $(HFLAGS) --make tab-vector.hs
+
+tab-mvector: tab-mvector.hs
+	$(HC) $(HFLAGS) --make tab-mvector.hs
 
 tab-c: tab.c
 	$(CC) $(CFLAGS) -o tab-c tab.c
