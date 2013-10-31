@@ -42,6 +42,11 @@ The programs (in the order they were written) are:
   to be substantially faster (?). A little faster than
   `tab-text`.
 
+* `tab-vector.hs`: Uses `Data.ByteString.Lazy.Char8` for
+  reading as `tab-bs` does, but uses `Data.Vector.Unboxed`
+  for storage (thus getting rid of `Data.Array.IO` for
+  cleanliness). A little slower than `tab-bs`.
+
 * `tab.py`: Python version for comparison.
 
 * `tab.c`: C version for comparison. About 5 times faster
