@@ -33,9 +33,14 @@ The programs (in the order they were written) are:
   for some internal operations. Also, rewrites the structure
   a bit. About twice as fast as `tab-faster`.
 
-* `tab-bs.hs`: Use `Data.ByteString.Lazy` instead of
+* `tab-bs.hs`: Use `Data.ByteString.Lazy.Char8` instead of
   `String` for some internal operations. About three times
   as fast as `tab-text`.
+
+* `tab-lines.hs`: Reads and processes votes a line at a
+  time. Uses `Data.ByteString.Char8` for reading as it seems
+  to be substantially faster (?). A little faster than
+  `tab-text`.
 
 * `tab.py`: Python version for comparison.
 
