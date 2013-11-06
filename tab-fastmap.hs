@@ -5,8 +5,8 @@
 
 -- Tabulate votes using Borda Count (or thereabouts).
 
+import Control.DeepSeq
 import Data.List
-import Data.Char
 import qualified Data.Map as M
 import Data.Ord
 import qualified Data.ByteString.Lazy.Char8 as B
@@ -35,9 +35,9 @@ tallyMap =
           where
             dash s'' = s'' ++ replicate (nCandidates - length s'') '-'
         score s' = map snd $ sort $ fixup $ 
-                    zip s' [nCandidates - 2, nCandidates - 1..0] 
+                    zip s' [nCandidates, nCandidates - 1..1] 
           where
-            fixup s'' = s'' ++ zip (candidates \\ map fst s'') [0..]
+            fixup s'' = s'' ++ zip (candidates \\ map fst s'') (repeat 0)
     makeperms = concatMap obliterate [0..nCandidates - 1]
       where
         obliterate n = concatMap permutations $ 
@@ -53,8 +53,9 @@ main = do
         foldl' tally (replicate nCandidates 0) $ B.lines voteText
         where
           tally cur pat =
-            let Just incs = M.lookup (B.take nCandidates pat) tallyMap in
-            zipWith (+) cur incs
+            let Just incs = 
+                  M.lookup (B.take nCandidates $ force pat) tallyMap in
+            zipWith (+) (force cur) incs
   let votes = sortBy (comparing (Down . snd)) $
-              zip ['a' ..] counts
+              zip candidates counts
   mapM_ (\(c, v) -> printf "%c: %d\n" c v) votes
