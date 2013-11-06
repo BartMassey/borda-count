@@ -51,6 +51,10 @@ The programs (in the order they were written) are:
   `Data.Vector.Mutable.Unboxed` for storage. Just barely
   faster than `tab-bs`.
 
+* `tab-fastmap.hs`: A pure variant of `tab-bs`
+  that uses a map from vote patterns to score lists
+  to score.
+
 * `tab.py`: Python version for comparison.
 
 * `tab.c`: C version for comparison. About 5 times faster
