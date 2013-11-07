@@ -10,55 +10,54 @@ contains the vote for one voter, consisting of a
 rank-ordering of the candidate identifier letters *a*
 through *f* from best to worst.
 
-The programs (in the order they were written) are:
+The programs (in the order they were written) are as
+follows. The slowdowns given are relative to tab.c running
+votes19.txt on a modern PC.
+
+* `tab-transpose.hs`: Transposes the votes file to get each
+  score rank together, then plays games with `replicate` to
+  get everything counted. Fails on large inputs. Runs very
+  slowly in any case. Uggh.
 
 * `tab-iterate.hs`: Scores all the votes, then totals up the
-  score of each candidate in turn. May fail on large inputs.
-
-* `tab-map.hs`: Uses an accumulating map constructor to
-  total up all the votes on the fly. Fails on large inputs.
-
-* `tab-transpose.hs`: Transposes the votes file to get
-  each score rank together, then plays games with
-  `replicate` to get everything counted. Fails
-  on large inputs.
+  score of each candidate in turn. Slowdown 61.
 
 * `tab-fast.hs`: Accumulates votes into a candidate vote
-  totals list on the fly. Not terribly fast.
+  totals list on the fly. Slowdown 38.
+
+* `tab-map.hs`: Uses an accumulating map constructor to
+  total up all the votes on the fly. Slowdown 24.
 
 * `tab-faster.hs`: Accumulates votes into a candidate vote
-  totals IOUArray on the fly. About twice as fast.
+  totals IOUArray on the fly. Slowdown 24.
 
 * `tab-text.hs`: Use `Data.Text.Lazy` instead of `String`
   for some internal operations. Also, rewrites the structure
-  a bit. About twice as fast as `tab-faster`.
+  a bit. Slowdown 16.
 
-* `tab-bs.hs`: Use `Data.ByteString.Lazy.Char8` instead of
-  `String` for some internal operations. About three times
-  as fast as `tab-text`.
+* `tab-fastmap.hs`: A pure variant of `tab-bs` that uses a
+  map from vote patterns to score lists to score. Slowdown
+  14.
 
 * `tab-lines.hs`: Reads and processes votes a line at a
   time. Uses `Data.ByteString.Char8` for reading as it seems
-  to be substantially faster (?). A little faster than
-  `tab-text`.
+  to be substantially faster (?). Slowdown 9.6.
 
 * `tab-vector.hs`: Uses `Data.ByteString.Lazy.Char8` for
   reading as `tab-bs` does, but uses `Data.Vector.Unboxed`
   for storage (thus getting rid of `Data.Array.IO` for
-  cleanliness). A little slower than `tab-bs`.
+  cleanliness). Slowdown 6.5.
+
+* `tab-bs.hs`: Use `Data.ByteString.Lazy.Char8` instead of
+  `String` for some internal operations. About three times
+  as fast as `tab-text`. Slowdown 5.0.
 
 * `tab-mvector.hs`: As `tab-vector`, but uses
-  `Data.Vector.Mutable.Unboxed` for storage. Just barely
-  faster than `tab-bs`.
+  `Data.Vector.Mutable.Unboxed` for storage. Slowdown 4.5.
 
-* `tab-fastmap.hs`: A pure variant of `tab-bs` that uses a
-  map from vote patterns to score lists to score. About 2.5x
-  slower than `tab-bs`.
+* `tab.py`: Python version for comparison. Slowdown 45.
 
-* `tab.py`: Python version for comparison.
-
-* `tab.c`: C version for comparison. About 5 times faster
-  than `tab-bs`.
+* `tab.c`: C version for comparison.
 
 * `tab.pro`: Prolog version for comparison.  SWI Prolog
   (`swipl`) will be needed to build, so not included in the
@@ -74,7 +73,8 @@ The programs (in the order they were written) are:
   tab-transpose-prolog`. Very slow. Fails on large inputs.
 
 To build everything except the Prolog programs, just type
-`make`.
+`make`. To build everything including the Prolog programs,
+use `make everything`. To run timing tests, say `make time`.
 
 The performance differences of these programs are pretty
 noticeable. However, they all fail for large vote file

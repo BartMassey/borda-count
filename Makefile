@@ -75,7 +75,7 @@ time: all $(DOUBLER)
 	-@for p in $(TARGETS); do echo -n "$$p: "; \
           $(TIME) ./$$p <votes19.txt 2>&1 >/dev/null; done
 	@echo -n "python: "
-	-$(TIME) python3 tab.py <votes19.txt 2>&1 >/dev/null
+	-@$(TIME) python3 tab.py <votes19.txt 2>&1 >/dev/null
 
 clean:
 	-rm -f $(TARGETS) $(PROLOG) *.o *.hi votes[1-9]*.txt
