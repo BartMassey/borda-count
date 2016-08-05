@@ -6,7 +6,7 @@
 -- Tabulate votes using Borda Count (or thereabouts).
 
 import Data.Ord
-import Data.List (sortBy)
+import Data.List (sort, sortBy)
 import Text.Printf
 import qualified Data.Map as M
 
@@ -22,4 +22,4 @@ main = do
               M.toList $ M.fromListWith (+) $
               concatMap (flip zip [6 :: Int, 5 .. 1]) $ 
               lines voteText
-  mapM_ (\(c, v) -> printf "%c: %d\n" c v) votes
+  mapM_ (\(c, v) -> printf "%c: %d\n" c v) $ sort votes
