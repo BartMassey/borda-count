@@ -34,4 +34,4 @@ main = do
               foldl' acc (replicate 6 0) $
               concatMap (flip zip [6,5..1]) $
               lines voteText
-  mapM_ (\(c, v) -> printf "%c: %d\n" c v) $ sort votes
+  mapM_ (\(c, v) -> printf "%c: %d\n" c v) votes

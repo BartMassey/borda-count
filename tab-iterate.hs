@@ -5,21 +5,27 @@
 
 -- Tabulate votes using Borda Count (or thereabouts).
 
+import Data.Ord
+import Data.List
 import Text.Printf
 
 -- Strategy: Filter out all the votes for the selected
--- candidate; add them up; print the total.
-showVotes :: [(Int, Char)] -> Char -> IO ()
-showVotes votes selector = do
-  let count = sum $ map fst $ filter ((== selector) . snd) votes
-  printf "%c: %d\n" selector count
+-- candidate; add them up; return the total.
+countVotes :: [(Int, Char)] -> Char -> (Char, Int)
+countVotes votes selector =
+    let count = sum $ map fst $ filter ((== selector) . snd) votes in
+    (selector, count)
 
 main :: IO ()
 main = do
   voteText <- getContents
   -- Strategy: attach the score to each vote; jam all the
-  -- votes together; for each candidate, call showVotes to
-  -- count and display the votes for that candidate.
+  -- votes together; for each candidate, call countVotes to
+  -- count the votes for that candidate, display in
+  -- descending order.
   let votes = concatMap (zip [6, 5 .. 1]) $ 
               lines voteText
-  mapM_ (showVotes votes) ['a' .. 'f']
+  let totals = map (countVotes votes) ['a' .. 'f']
+  let results = sortBy (comparing (Down . snd)) totals
+  mapM_ (\(c, v) -> printf "%c: %d\n" c v) results
+

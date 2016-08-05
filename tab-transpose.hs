@@ -23,5 +23,4 @@ main = do
               map (\l -> (head l, length l)) $ group $ sort $
               concat $ concat $ zipWith replicate [6,5..1] $
               transpose $ lines voteText
-  mapM_ (\(c, v) -> printf "%c: %d\n" c v) $ sort votes
-
+  mapM_ (\(c, v) -> printf "%c: %d\n" c v) votes
