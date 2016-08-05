@@ -8,7 +8,7 @@
 import Data.Ord
 import Data.List (sortBy)
 import Text.Printf
-import qualified Data.Map as M
+import qualified Data.Map.Strict as M
 
 main :: IO ()
 main = do

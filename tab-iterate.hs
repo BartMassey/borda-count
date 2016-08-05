@@ -10,7 +10,6 @@ import Data.List
 import Text.Printf
 
 -- Strategy: Filter out all the votes for the selected
--- candidate; add them up; return the total.
 countVotes :: [(Int, Char)] -> Char -> (Char, Int)
 countVotes votes selector =
     let count = sum $ map fst $ filter ((== selector) . snd) votes in
