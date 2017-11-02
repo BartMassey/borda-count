@@ -18,9 +18,7 @@ fn main() {
     for maybe_line in stdin.lock().lines() {
         let line = maybe_line.expect("failed to read input line");
         assert!(line.len() == 6, "wrong input line size");
-        let carray: Vec<char> = line.chars().collect();
-        for i in 0..6 {
-            let c = carray[i];
+        for (i, c) in line.chars().enumerate() {
             if c == '-' {
                 continue
             };
