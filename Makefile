@@ -15,7 +15,7 @@ PC = swipl
 PFLAGS = -O2
 TARGETS = tab-iterate tab-map tab-transpose tab-fast tab-faster \
           tab-text tab-c tab-bs tab-lines tab-vector tab-mvector \
-	  tab-fastmap
+	  tab-fastmap tab-rs
 DOUBLER = votes2.txt votes3.txt votes4.txt votes5.txt votes6.txt \
           votes7.txt votes8.txt votes9.txt votes10.txt votes11.txt \
           votes12.txt votes13.txt votes14.txt votes15.txt votes16.txt \
@@ -66,6 +66,9 @@ tab-simple: tab-simple.hs
 
 tab-c: tab.c
 	$(CC) $(CFLAGS) -o tab-c tab.c
+
+tab-rs: tab.rs
+	rustc -C lto -C opt-level=3 -o tab-rs tab.rs
 
 tab-prolog.o: tab.pro
 	$(PC) $(PFLAGS) -q -t main -o tab-prolog.o -c tab.pro
