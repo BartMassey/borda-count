@@ -59,7 +59,8 @@ votes19.txt on a modern PC.
 
 * `tab.c`: C version for comparison.
 
-* `tab.rs`: Rust version for comparison. Slowdown 1.7x.
+* `tab.rs`: Highly-optimized Rust version for
+  comparison. Speedup 2x.
 
 * `tab.pro`: Prolog version for comparison.  SWI Prolog
   (`swipl`) will be needed to build, so not included in the

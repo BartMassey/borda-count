@@ -6,7 +6,7 @@
 # Makefile for Borda Count Haskell demos
 
 CC = gcc
-CFLAGS = -Wall -O2 -std=c99
+CFLAGS = -Wall -O4 -march=native -std=c99
 HC = ghc
 HFLAGS = -Wall -O2
 TARGETS = tab-iterate tab-map tab-transpose tab-fast tab-c tab-simple

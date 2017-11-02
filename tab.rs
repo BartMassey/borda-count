@@ -1,7 +1,8 @@
 // Tabulate Borda Count votes.
 
-use std::io::prelude::*;
 use std::io;
+use std::io::prelude::*;
+use std::io::ErrorKind;
 
 #[derive(Copy, Clone)]
 struct Vote {
@@ -12,18 +13,25 @@ struct Vote {
 fn main() {
     let mut votes = [Vote{candidate: '?', tally: 0}; 6];
     for i in 0..6 {
-        votes[i].candidate = (i + ('a' as usize)) as u8 as char
+        votes[i].candidate = (i as u8 + b'a') as char
     };
     let stdin = io::stdin();
-    for maybe_line in stdin.lock().lines() {
-        let line = maybe_line.expect("failed to read input line");
-        assert!(line.len() == 6, "wrong input line size");
-        for (i, c) in line.chars().enumerate() {
-            if c == '-' {
+    let mut stdin = stdin.lock();
+    let mut line = [0u8; 7];
+    loop {
+        match stdin.read_exact(&mut line) {
+            Ok(()) => assert!(line[6] == b'\n'),
+            Err(e) => match e.kind() {
+                ErrorKind::UnexpectedEof => break,
+                _ => panic!("read error")
+            }
+        };
+        for (i, c) in line.iter().enumerate() {
+            if *c == b'\n' || *c == b'-' {
                 continue
             };
-            assert!(c >= 'a' && c <= 'f', "bad vote char");
-            votes[(c as usize - 'a' as usize)].tally += 6 - i
+            assert!(*c >= b'a' && *c <= b'f', "bad vote char");
+            votes[*c as usize - b'a' as usize].tally += 6 - i
         }
     };
     votes.sort_unstable_by_key(|v| v.tally);
