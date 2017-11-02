@@ -20,44 +20,46 @@ votes19.txt on a modern PC.
   slowly in any case. Uggh.
 
 * `tab-iterate.hs`: Scores all the votes, then totals up the
-  score of each candidate in turn. Slowdown 61.
+  score of each candidate in turn. Slowdown 51x.
 
 * `tab-fast.hs`: Accumulates votes into a candidate vote
-  totals list on the fly. Slowdown 38.
+  totals list on the fly. Slowdown 33x.
 
 * `tab-map.hs`: Uses an accumulating map constructor to
-  total up all the votes on the fly. Slowdown 24.
+  total up all the votes on the fly. Slowdown 22x.
 
 * `tab-faster.hs`: Accumulates votes into a candidate vote
-  totals IOUArray on the fly. Slowdown 24.
+  totals IOUArray on the fly. Slowdown 13x.
 
 * `tab-text.hs`: Use `Data.Text.Lazy` instead of `String`
   for some internal operations. Also, rewrites the structure
-  a bit. Slowdown 16.
+  a bit. Slowdown 13x.
 
 * `tab-fastmap.hs`: A pure variant of `tab-bs` that uses a
   map from vote patterns to score lists to score. Slowdown
-  14.
+  16x.
 
 * `tab-lines.hs`: Reads and processes votes a line at a
   time. Uses `Data.ByteString.Char8` for reading as it seems
-  to be substantially faster (?). Slowdown 9.6.
+  to be substantially faster (?). Slowdown 11x.
 
 * `tab-vector.hs`: Uses `Data.ByteString.Lazy.Char8` for
   reading as `tab-bs` does, but uses `Data.Vector.Unboxed`
   for storage (thus getting rid of `Data.Array.IO` for
-  cleanliness). Slowdown 6.5.
+  cleanliness). Slowdown 6x.
 
 * `tab-bs.hs`: Use `Data.ByteString.Lazy.Char8` instead of
   `String` for some internal operations. About three times
-  as fast as `tab-text`. Slowdown 5.0.
+  as fast as `tab-text`. Slowdown 5x.
 
 * `tab-mvector.hs`: As `tab-vector`, but uses
-  `Data.Vector.Mutable.Unboxed` for storage. Slowdown 4.5.
+  `Data.Vector.Mutable.Unboxed` for storage. Slowdown 5x.
 
-* `tab.py`: Python version for comparison. Slowdown 45.
+* `tab.py`: Python version for comparison. Slowdown 57x.
 
 * `tab.c`: C version for comparison.
+
+* `tab.rs`: Rust version for comparison. Slowdown 1.7x.
 
 * `tab.pro`: Prolog version for comparison.  SWI Prolog
   (`swipl`) will be needed to build, so not included in the
@@ -77,6 +79,6 @@ To build everything except the Prolog programs, just type
 use `make everything`. To run timing tests, say `make time`.
 
 The performance differences of these programs are pretty
-noticeable. However, they all fail for large vote file
+noticeable. However, many fail for large vote file
 inputs. To see this, say `"sh doubler.sh"` and try the
 various programs on large(-ish) files.
