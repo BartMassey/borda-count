@@ -17,45 +17,45 @@ votes19.txt on a modern PC.
 * `tab-transpose.hs`: Transposes the votes file to get each
   score rank together, then plays games with `replicate` to
   get everything counted. Fails on large inputs. Runs very
-  slowly in any case. Uggh.
+  slowly in any case. Uggh. Slowdown 1187x.
+
+* `tab.py`: Python version for comparison. Slowdown 48x.
 
 * `tab-iterate.hs`: Scores all the votes, then totals up the
-  score of each candidate in turn. Slowdown 51x.
+  score of each candidate in turn. Slowdown 35x.
 
 * `tab-fast.hs`: Accumulates votes into a candidate vote
-  totals list on the fly. Slowdown 33x.
+  totals list on the fly. Slowdown 25x.
 
 * `tab-map.hs`: Uses an accumulating map constructor to
-  total up all the votes on the fly. Slowdown 22x.
-
-* `tab-faster.hs`: Accumulates votes into a candidate vote
-  totals IOUArray on the fly. Slowdown 13x.
+  total up all the votes on the fly. Slowdown 18x.
 
 * `tab-text.hs`: Use `Data.Text.Lazy` instead of `String`
   for some internal operations. Also, rewrites the structure
-  a bit. Slowdown 13x.
+  a bit. Slowdown 12x.
 
 * `tab-fastmap.hs`: A pure variant of `tab-bs` that uses a
   map from vote patterns to score lists to score. Slowdown
-  16x.
+  13x.
 
 * `tab-lines.hs`: Reads and processes votes a line at a
   time. Uses `Data.ByteString.Char8` for reading as it seems
-  to be substantially faster (?). Slowdown 11x.
+  to be substantially faster (?). Slowdown 10x.
+
+* `tab-faster.hs`: Accumulates votes into a candidate vote
+  totals IOUArray on the fly. Slowdown 9x.
+
+* `tab-bs.hs`: Use `Data.ByteString.Lazy.Char8` instead of
+  `String` for some internal operations. About twice as fast
+  as `tab-text`. Slowdown 5x.
 
 * `tab-vector.hs`: Uses `Data.ByteString.Lazy.Char8` for
   reading as `tab-bs` does, but uses `Data.Vector.Unboxed`
   for storage (thus getting rid of `Data.Array.IO` for
-  cleanliness). Slowdown 6x.
-
-* `tab-bs.hs`: Use `Data.ByteString.Lazy.Char8` instead of
-  `String` for some internal operations. About three times
-  as fast as `tab-text`. Slowdown 5x.
+  cleanliness). Slowdown 5x.
 
 * `tab-mvector.hs`: As `tab-vector`, but uses
   `Data.Vector.Mutable.Unboxed` for storage. Slowdown 5x.
-
-* `tab.py`: Python version for comparison. Slowdown 57x.
 
 * `tab.c`: C version for comparison.
 
